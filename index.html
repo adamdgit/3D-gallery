@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="app.js" defer></script>
+</head>
+<style>
+
+
+  .perspective {
+    background-color: #111;
+    padding: 1rem;
+    width: 400px;
+    height: 400px;
+    perspective: 2000px;
+    display: flex;
+    position: relative;
+    margin: 300px auto 0 auto;
+    transform: rotate(-5deg);
+  }
+
+  .wrap {
+    transform-style: preserve-3d;
+    width: 400px;
+    height: 400px;
+    border: 3px solid black;
+    transform: translateZ(520px) rotateY(50deg);
+  }
+
+  .img {
+    position: absolute;
+    height: 400px;
+    width: 400px;
+    object-fit: cover;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    border-radius: 20px;
+  }
+
+  .img1 {
+    transform: rotate3D(0,1,0,0deg) translate3d(0, 0, 500px);
+  }
+  .img2 {
+    transform: rotate3D(0,1,0,60deg) translate3d(0, 0, 500px);
+  }
+  .img3 {
+    transform: rotate3D(0,1,0,120deg) translate3d(0, 0, 500px);
+  }
+  .img4 {
+    transform: rotate3D(0,1,0,180deg) translate3d(0, 0, 500px);
+  }
+  .img5 {
+    transform: rotate3D(0,1,0,240deg) translate3d(0, 0, 500px);
+  }
+  .img6 {
+    transform: rotate3D(0,1,0,300deg) translate3d(0, 0, 500px);
+  }
+
+</style>
+<body>
+
+  <div class="perspective">
+
+    <div class="wrap">
+      <img class="img img1" src="pic1.jpg" />
+      <img class="img img2" src="pic2.jpg" />
+      <img class="img img3" src="pic3.jpg" />
+      <img class="img img4" src="pic4.jpg" />
+      <img class="img img5" src="pic5.jpg" />
+      <img class="img img6" src="pic6.jpg" />
+    </div>
+
+  </div>
+
+</body>
+</html>
