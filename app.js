@@ -14,7 +14,7 @@ let skipCycle = false;
 
 // set default rotation
 images.forEach((image, i) => {
-  image.style.transform = `rotate3D(0,1,0,${(i+1)*60}deg) translateZ(40vh)`;
+  image.style.transform = `rotate3D(0,1,0,${(i+1)*45}deg) translateZ(40vh)`;
 })
 
 perspective.addEventListener('pointerdown', handlePointerDown);
@@ -34,11 +34,11 @@ function handlePointerDown(e) {
 
     deg = (e.clientX - x) / sensitivity;
     totalDeg = deg+prevdeg+60;
-    updateImgVisibility(totalDeg);
-    
+
     function rotateGallery() {
+      updateImgVisibility(totalDeg);
       images.forEach((image, i) => {
-        image.style.transform = `rotate3D(0,1,0,${totalDeg + (i)*60}deg) translateZ(40vh)`;
+        image.style.transform = `rotate3D(0,1,0,${totalDeg + (i)*45}deg) translateZ(40vh)`;
       })
       perspective.style.cursor = 'grabbing';
     }
@@ -52,17 +52,19 @@ function handlePointerDown(e) {
   prevdeg += deg;
 
   perspective.addEventListener('pointerup', handlePointerUp)
-  // removed pointermove event listener on pointerup
+
+  // remove pointermove event listener on pointerup
   function handlePointerUp(e) {
     perspective.removeEventListener('pointermove', handlePointerMove)
     perspective.style.cursor = 'grab';
   };
+
 };
 
 function updateImgVisibility(totalDeg) {
 
-  // check every 5 degrees for performance
-  if (totalDeg % 5 === 0) 
+  // check every 2 degrees for performance
+  if (totalDeg % 2 === 0) 
 
   // when rotation is > 275 and < 80 the image should be hidden
   images.forEach((image) => {
