@@ -70,9 +70,9 @@ function updateImgVisibility(totalDeg) {
   images.forEach((image) => {
     if (Math.abs(image.style.transform.split(" ")[3].slice(0, -4) % 360) > 275 
     || Math.abs(image.style.transform.split(" ")[3].slice(0, -4) % 360) < 80) {
-      image.style.visibility = 'hidden';
+      image.style.opacity = '0';
     } else {
-      image.style.visibility = 'visible';
+      image.style.opacity = '1';
     }
   })
   
