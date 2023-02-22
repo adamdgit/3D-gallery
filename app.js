@@ -7,16 +7,22 @@ const sensitivity = 4;
 let prevdeg = 0;
 // current rotation
 let deg = 0;
-// first image changes to visible
+
 let counter1 = 0;
-// this images becomes hidden as it moves off screen
 let counter2 = 3;
+let skipCycle = false;
+
+// set default rotation
+images.forEach((image, i) => {
+  image.style.transform = `rotate3D(0,1,0,${(i+1)*60}deg) translateZ(40vh)`;
+})
 
 perspective.addEventListener('pointerdown', handlePointerDown);
 
 function handlePointerDown(e) {
   // cancel pointerdown event
   e.preventDefault();
+
   // get mouse pos on click
   const x = e.clientX;
 
@@ -27,17 +33,19 @@ function handlePointerDown(e) {
   function handlePointerMove(e) {
 
     deg = (e.clientX - x) / sensitivity;
-    updateImgVisibility()
-
-    function rotateGallery(e) {
-      wrapper.style.transform = `translateZ(55vw) rotateY(${deg + prevdeg +60}deg) rotate(-3deg)`;
+    totalDeg = deg+prevdeg+60;
+    updateImgVisibility(totalDeg);
+    
+    function rotateGallery() {
+      images.forEach((image, i) => {
+        image.style.transform = `rotate3D(0,1,0,${totalDeg + (i)*60}deg) translateZ(40vh)`;
+      })
       perspective.style.cursor = 'grabbing';
     }
 
     window.requestAnimationFrame(() => {
       rotateGallery(e);
     });
-
   };
 
   // save current rotation value
@@ -51,24 +59,19 @@ function handlePointerDown(e) {
   };
 };
 
-function updateImgVisibility() {
+function updateImgVisibility(totalDeg) {
 
-  // every 30 degrees image[counter1] becomes visible - images[0] visible
-  // and image[counter2] becomes hidden - images[3] hidden
-  // increment counter1
-  // decrement counter2
+  // check every 5 degrees for performance
+  if (totalDeg % 5 === 0) 
 
-  let temp = deg+prevdeg%360;
-  if(temp % 30 === 0 && temp > 0) {
-    console.log(images[counter1])
-    images[counter1].style.visibility = 'visible';
-    counter1 --;
-    if (counter1 < 0) counter1 = 5
-  }
-  if(temp % 30 === 0 && temp < 0) {
-    console.log(images[counter2])
-    images[counter2].style.visibility = 'hidden';
-    counter2 ++;
-    if (counter2 > 5) counter2 = 0
-  }
-}
+  // when rotation is > 275 and < 80 the image should be hidden
+  images.forEach((image) => {
+    if (Math.abs(image.style.transform.split(" ")[3].slice(0, -4) % 360) > 275 
+    || Math.abs(image.style.transform.split(" ")[3].slice(0, -4) % 360) < 80) {
+      image.style.visibility = 'hidden';
+    } else {
+      image.style.visibility = 'visible';
+    }
+  })
+  
+};
