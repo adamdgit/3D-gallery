@@ -22,7 +22,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    margin: 300px auto 0 auto;
+    margin: 20vh auto 0 auto;
     cursor: grab;
     padding-block: 5rem;
   }
@@ -31,7 +31,7 @@
     transform-style: preserve-3d;
     width: 400px;
     height: 400px;
-    transform: translateZ(55vw);
+    transform: translateZ(55vw) rotate(-2deg);
   }
 
   .img {
@@ -67,6 +67,25 @@
   }
   .img8 {
     opacity: 0;
+  }
+
+  @media only screen and (max-width: 699px) {
+    body {
+      touch-action: none;
+    }
+
+    .img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .perspective {
+      height: 200px;
+    }
+    .wrap {
+      width: 200px;
+      height: 200px;
+    }
   }
 
 </style>
