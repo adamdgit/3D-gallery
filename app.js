@@ -8,10 +8,6 @@ let prevdeg = 0;
 // current rotation
 let deg = 0;
 
-let counter1 = 0;
-let counter2 = 3;
-let skipCycle = false;
-
 // set default rotation
 images.forEach((image, i) => {
   image.style.transform = `rotate3D(0,1,0,${(i+1)*45}deg) translateZ(40vh)`;
@@ -33,7 +29,8 @@ function handlePointerDown(e) {
   function handlePointerMove(e) {
 
     deg = (e.clientX - x) / sensitivity;
-    totalDeg = deg+prevdeg+60;
+    console.log(deg)
+    totalDeg = deg+prevdeg+45;
 
     function rotateGallery() {
       updateImgVisibility(totalDeg);
