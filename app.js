@@ -7,10 +7,12 @@ const sensitivity = 4;
 let prevdeg = 0;
 // current rotation
 let deg = 0;
+// how many degrees each image takes up within a circle
+const sectionDeg = 360 / images.length;
 
 // set default rotation
 images.forEach((image, i) => {
-  image.style.transform = `rotate3D(0,1,0,${(i+1)*45}deg) translateZ(40vh)`;
+  image.style.transform = `rotate3D(0,1,0,${(i+1) * sectionDeg}deg) translateZ(40vh)`;
 })
 
 perspective.addEventListener('pointerdown', handlePointerDown);
@@ -30,12 +32,12 @@ function handlePointerDown(e) {
 
     deg = (e.clientX - x) / sensitivity;
     console.log(deg)
-    totalDeg = deg+prevdeg+45;
+    totalDeg = deg + prevdeg + sectionDeg;
 
     function rotateGallery() {
       updateImgVisibility(totalDeg);
       images.forEach((image, i) => {
-        image.style.transform = `rotate3D(0,1,0,${totalDeg + (i)*45}deg) translateZ(40vh)`;
+        image.style.transform = `rotate3D(0,1,0,${totalDeg + (i) * sectionDeg}deg) translateZ(40vh)`;
       })
       perspective.style.cursor = 'grabbing';
     }
