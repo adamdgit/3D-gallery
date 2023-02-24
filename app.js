@@ -31,19 +31,14 @@ function handlePointerDown(e) {
   function handlePointerMove(e) {
 
     deg = (e.clientX - x) / sensitivity;
-    console.log(deg)
     totalDeg = deg + prevdeg + sectionDeg;
 
-    function rotateGallery() {
+    window.requestAnimationFrame(() => {
       updateImgVisibility(totalDeg);
       images.forEach((image, i) => {
-        image.style.transform = `rotate3D(0,1,0,${totalDeg + (i) * sectionDeg}deg) translateZ(40vh)`;
+        image.style.transform = `rotate3D(0,1,0,${totalDeg + (i * sectionDeg)}deg) translateZ(40vh)`;
       })
       perspective.style.cursor = 'grabbing';
-    }
-
-    window.requestAnimationFrame(() => {
-      rotateGallery(e);
     });
   };
 
@@ -62,8 +57,8 @@ function handlePointerDown(e) {
 
 function updateImgVisibility(totalDeg) {
 
-  // check every 2 degrees for performance
-  if (totalDeg % 2 === 0) 
+  // check every .5 degrees
+  if (totalDeg % .5 === 0) 
 
   // when rotation is > 275 and < 80 the image should be hidden
   images.forEach((image) => {
