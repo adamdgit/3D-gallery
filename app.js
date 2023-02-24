@@ -55,7 +55,6 @@ function handlePointerDown(e) {
 };
 
 function updateImgVisibility(totalDeg) {
-
   // check every .5 degrees
   if (totalDeg % .5 === 0) 
 
@@ -68,5 +67,4 @@ function updateImgVisibility(totalDeg) {
       image.style.opacity = '1';
     }
   })
-  
 };
