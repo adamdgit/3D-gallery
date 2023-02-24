@@ -18,9 +18,10 @@ images.forEach((image, i) => {
 perspective.addEventListener('pointerdown', handlePointerDown);
 
 function handlePointerDown(e) {
-  // cancel pointerdown event
-  e.preventDefault();
 
+  e.preventDefault();
+  perspective.style.cursor = 'grabbing';
+  
   // get mouse pos on click
   const x = e.clientX;
 
@@ -29,16 +30,14 @@ function handlePointerDown(e) {
 
   // transform rotation of wrapper on mouse move
   function handlePointerMove(e) {
-
     deg = (e.clientX - x) / sensitivity;
     totalDeg = deg + prevdeg + sectionDeg;
 
     window.requestAnimationFrame(() => {
-      updateImgVisibility(totalDeg);
       images.forEach((image, i) => {
         image.style.transform = `rotate3D(0,1,0,${totalDeg + (i * sectionDeg)}deg) translateZ(40vh)`;
       })
-      perspective.style.cursor = 'grabbing';
+      updateImgVisibility(totalDeg);
     });
   };
 
